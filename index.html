@@ -1,9 +1,10 @@
+<iframe 
+srcdoc='
+
 <!DOCTYPE html>
 <html>
 
 <head>
-
-<meta charset="UTF-8">
 
 <style>
 
@@ -11,49 +12,93 @@ html,body{
 
 margin:0;
 padding:0;
-
+overflow:hidden;
 background:transparent;
 
-overflow:hidden;
-
 }
 
 
-img{
+svg{
 
 width:100%;
-
-display:block;
-
-
-opacity:0;
-
-
-animation:
-
-show 5s ease forwards;
+height:100%;
 
 }
 
 
+/* 线条动画 */
 
-@keyframes show{
+.line{
 
+stroke:#9bc7a6;
+stroke-width:1.5;
+fill:none;
+opacity:0.5;
+
+stroke-dasharray:300;
+stroke-dashoffset:300;
+
+animation:draw 8s linear infinite;
+
+}
+
+
+@keyframes draw{
 
 0%{
 
+stroke-dashoffset:300;
 opacity:0;
 
-transform:translateY(20px);
+}
+
+
+30%{
+
+opacity:0.6;
 
 }
 
 
 100%{
 
-opacity:1;
+stroke-dashoffset:0;
+opacity:0.2;
+
+}
+
+}
+
+
+
+/* 数据点 */
+
+.dot{
+
+fill:#8fc49b;
+
+animation:float 5s infinite ease-in-out;
+
+}
+
+
+@keyframes float{
+
+
+0%,100%{
 
 transform:translateY(0);
+
+opacity:0.4;
+
+}
+
+
+50%{
+
+transform:translateY(-15px);
+
+opacity:0.9;
 
 }
 
@@ -63,6 +108,7 @@ transform:translateY(0);
 
 </style>
 
+
 </head>
 
 
@@ -70,10 +116,102 @@ transform:translateY(0);
 <body>
 
 
-<img src="chart.png">
+<svg viewBox="0 0 1200 600">
+
+
+<!-- 流动数据曲线 -->
+
+<path class="line"
+
+d="
+M80 420
+
+C180 350 260 380 350 300
+
+S520 230 620 300
+
+S820 430 930 320
+
+S1080 260 1150 200
+
+"/>
+
+
+
+<path class="line"
+
+style="animation-delay:2s"
+
+d="
+M100 470
+
+C220 400 350 430 460 350
+
+S700 250 820 350
+
+S1000 430 1140 300
+
+"/>
+
+
+
+<!-- 动态点 -->
+
+<circle class="dot"
+cx="200"
+cy="350"
+r="6"/>
+
+
+<circle class="dot"
+cx="420"
+cy="290"
+r="4"
+style="animation-delay:1s"/>
+
+
+<circle class="dot"
+cx="650"
+cy="330"
+r="5"
+style="animation-delay:2s"/>
+
+
+<circle class="dot"
+cx="850"
+cy="400"
+r="4"
+style="animation-delay:3s"/>
+
+
+<circle class="dot"
+cx="1050"
+cy="260"
+r="6"
+style="animation-delay:1.5s"/>
+
+
+
+</svg>
 
 
 </body>
 
-
 </html>
+
+
+'
+
+style="
+
+width:100%;
+
+height:500px;
+
+border:0;
+
+background:transparent;
+
+">
+
+</iframe>
